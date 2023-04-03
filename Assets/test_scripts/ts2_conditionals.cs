@@ -65,7 +65,7 @@ public class ts2_conditionals : MonoBehaviour
 
 
 
-        string entity_type;
+        //string entity_type;
         
 
     }

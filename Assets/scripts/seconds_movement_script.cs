@@ -6,7 +6,7 @@ using UnityEngine;
 public class seconds_movement_script : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         string time_string = DateTime.Now.TimeOfDay.ToString();
         
@@ -27,5 +27,5 @@ public class seconds_movement_script : MonoBehaviour
     void Update()
     {
         
-    }
+    }*/
 }

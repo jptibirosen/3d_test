@@ -6,7 +6,7 @@ using UnityEngine;
 public class minutes_movement_script : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         string time_string = DateTime.Now.TimeOfDay.ToString();
         
@@ -17,7 +17,7 @@ public class minutes_movement_script : MonoBehaviour
         int minutes = Int32.Parse(list_time_elements[1]);
         int seconds = Int32.Parse(list_time_elements[2].Split(".")[0]);
 
-        float y_angle = 6 * minutes;
+        float y_angle = 6 * minutes + (seconds * 30)/59;    //the second term makes sure the minute hand moves 30 degrees for every 59 sec
         Vector3 rotation_vector = new Vector3(0.0f, y_angle, 0.0f);
 
         gameObject.transform.Rotate(rotation_vector, Space.Self);
@@ -27,5 +27,5 @@ public class minutes_movement_script : MonoBehaviour
     void Update()
     {
         
-    }
+    }*/
 }
