@@ -13,12 +13,13 @@ public class controller_script : MonoBehaviour
     [SerializeField] GameObject minute_pivot;
     [SerializeField] GameObject second_pivot;
     [SerializeField] TextMeshPro am_pm_display;
+    [SerializeField] bool warp_speed = false;   //use this to speed up time
 
     
 
     
 
-    float elapsed = 0.0f;   //this will probably not work
+    float elapsed = 0.0f;   //used by "tick_2"; pay no attention to it
 
     List<int> Get_time(){    
         /* we retrieve the current time and break it down into hours(12), minutes, seconds and time of day AM/PM (can take 0 or 1)
@@ -89,18 +90,23 @@ public class controller_script : MonoBehaviour
     void Tick(){
         /*this function moves the three arms of the clock by the amount they travel in one second*/
 
+        int warp_factor = 1;
+        if (warp_speed){
+            warp_factor = 500;
+        }
+       
+
         float second_angle_step = 360 / 60;
-        float minute_angle_step = 360 / 3600;
-        float hour_angle_step = 360 / (12 * 3600);
-        Debug.Log(minute_angle_step);
+        double minute_angle_step = 360 / 3600.0;
+        double hour_angle_step = 360 / (float)(12 * 3600);
 
         Vector3 second_rotation_step = new Vector3(0, second_angle_step, 0);
-        Vector3 minute_rotation_step = new Vector3(0, minute_angle_step, 0);
-        Vector3 hour_rotation_step = new Vector3(0, hour_angle_step, 0);
+        Vector3 minute_rotation_step = new Vector3(0, (float)minute_angle_step, 0);
+        Vector3 hour_rotation_step = new Vector3(0, (float)hour_angle_step, 0);
 
-        second_pivot.transform.Rotate(second_rotation_step * Time.deltaTime);
-        minute_pivot.transform.Rotate(minute_rotation_step * Time.deltaTime);
-        hour_pivot.transform.Rotate(hour_rotation_step * Time.deltaTime);
+        second_pivot.transform.Rotate(second_rotation_step * Time.deltaTime * warp_factor);
+        minute_pivot.transform.Rotate(minute_rotation_step * Time.deltaTime * warp_factor);
+        hour_pivot.transform.Rotate(hour_rotation_step * Time.deltaTime * warp_factor);
 
 
 
@@ -127,7 +133,7 @@ public class controller_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Tick_2();
+        Tick();
 
         if (Time.deltaTime % 600 == 0){     //error correction every 10 minutes
             Set_time(Get_time());
